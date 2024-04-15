@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Enhance the style as needed, possibly including a link to a CSS file for styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <div id="video-container">
+        <video autoplay muted loop>
+            <source src="static/videos/bgvideo.mp4" type="video/mp4">
+            <!-- Add additional source elements for different video formats -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="container">
+        <h2>Login</h2>
+        <form action="/auth" method="POST">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Password"required>
+            </div>
+
+            <button type="submit">Login</button>
+            {% if failed == True %}
+            <p class="error-message">Invalid username or password</p>
+            {% endif %}
+
+        </form>
+        
+    </div>
+</body>
+</html>

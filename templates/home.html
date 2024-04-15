@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offensiveness Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.sidebar ul li').forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+        function logout() {
+            window.location.href = "/";
+        }
+    </script>
+</head>
+<body>
+    <div class="top-right-corner">
+        <div class="user-info">
+            <span class="username">Welcome, {{ Name }}</span>
+        </div>
+        <button onclick="logout()" class="logout-button">Logout</button>
+    </div>
+    <div id="video-container">
+        <video autoplay muted loop>
+            <source src="static/videos/bgvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="sidebar">
+        <h3>Input History</h3>
+        <ul>
+        {% if history %}
+            {% for record in history %}
+                {% if record[2] == 1 %}
+                    <li style="color: rgb(123, 3, 35)">{{ record[0]}}</li>
+                {% else %}
+                    <li>{{ record[0]}}</li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Enter text for offensiveness prediction</h2>
+        <form method="post">
+            <textarea name="text_to_predict" rows="10" cols="50"></textarea>
+            <br>
+            <input type="submit" value="Predict">
+        </form>
+        <h2>Predicted Text:</h2>
+        <div class="output">
+            <p>{{ text_content }}</p>
+        </div>
+        <h2>Offensiveness Prediction:</h2>
+        <div class="output">
+            <p class="emoji">{% if off_rating == 1 %}🚨{% else %}✅{% endif %}</p>
+        </div>
+    </div>
+</body>
+</html>

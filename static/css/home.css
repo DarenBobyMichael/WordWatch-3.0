@@ -1,0 +1,168 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FAFAFA;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.emoji{
+    font-size: 2em;
+}
+.sidebar {
+    width: 250px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Enable vertical scrolling if the content overflows */
+}
+
+.sidebar ul li {
+    opacity: 0; /* Start with items invisible */
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    animation: fadeInAnimation ease 0.5s forwards; /* Apply the fade-in animation */
+    word-wrap: break-word; /* Wrap long text */
+}
+
+@keyframes fadeInAnimation {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place video behind other elements */
+    overflow: hidden; /* Hide overflow content */
+}
+/* Container Styles */
+.container {
+    max-width: 600px;
+    margin: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.1); /* Adjust the alpha value for transparency */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align text to the left for form and output */
+}
+/* Typography */
+h2 {
+    font-size: 24px; /* Slightly reduced for balance */
+    color: #ffffff;
+    margin: 16px 0; /* Adjusted margin for tighter layout */
+    text-align: center; /* Center the text */
+}
+.output h2 {
+    margin-top: 30px; /* Extra space above output heading for visual separation */
+}
+
+p {
+    line-height: 1.6;
+    margin: 8px 0;
+    color: white; /* Reduced margin for a compact look */
+}
+/* Form Elements */
+textarea, input[type="submit"] {
+    width: calc(100% - 24px); /* Adjust width accounting for padding */
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: block; /* Ensure these elements are block-level for proper stacking */
+}
+textarea {
+    resize: vertical;
+    margin: 0 auto; /* Center the textarea horizontally */
+    overflow: auto;
+}
+.top-right-corner {
+    display: flex; /* Keeps the container as a flexbox */
+    flex-direction: column; /* Stacks child elements vertically */
+    align-items: flex-end; /* Aligns children to the right */
+    position: fixed; 
+    right: 20px;
+    top: 0;
+    z-index: 100;
+    padding: 10px;
+}
+
+/* .user-info button {
+    Cursor and padding styles as before, no changes needed here.
+} */
+
+.username{
+    color: #FFFFFF; /* Ensures username text color is white */
+}
+
+.logout-button {
+    background-color: rgba(255, 90, 95, 0.4);
+    color: white;
+    border: none;
+    padding: 8px 16px; /* Existing padding */
+    margin-top: 10px; /* Creates space between the welcome message and button */
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px; 
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(255, 59, 63, 0.4); /* Hover effect */
+}
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #ffffff;
+    font-weight: bold;
+    border: none; /* Ensure consistency in appearance */
+    cursor: pointer;
+    display: block; /* Make the input button a block-level element */
+    margin: 0 auto; /* Center the input button horizontally */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+/* Specific styling for output to visually differentiate it from the form */
+.output {
+    background-color: rgba(255, 255, 255, 0.1); /* Slight background difference for output */
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px; /* Separate from form area */
+    display: flex; /* Use flexbox to center the textarea and input button vertically */
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center; /* Center the elements horizontally */
+    justify-content: center; /* Center the elements vertically */
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.output p {
+    margin: 10px 0; /* Add margin to the paragraphs */
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container, .output {
+    animation: slideIn 0.5s ease-out forwards;
+}
