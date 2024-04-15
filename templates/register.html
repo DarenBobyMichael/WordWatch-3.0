@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
 <body>
+    <div id="video-container">
+        <video autoplay muted loop>
+            <source src="static/videos/bgvideo.mp4" type="video/mp4">
+            <!-- Add additional source elements for different video formats -->
+            Your browser does not support the video tag.
+        </video>
+    </div> <!-- Close the video-container div here -->
     <div class="container">
         <h2>Register</h2>
         <form action="/register" method="POST">
