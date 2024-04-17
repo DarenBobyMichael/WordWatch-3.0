@@ -14,10 +14,10 @@ def convert_to_wav(input_filename):
         subprocess.run(["ffmpeg", "-i", input_filename, output_filename])
         print(f"File '{input_filename}' has been converted to '{output_filename}'.")
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_cred.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "saraswati/google_cred.json"
 def transcribe_malayalam_audio():
     audio_path=input('Enter audio file name: ')
-    audio_path='Audio/'+audio_path
+    audio_path='saraswati/Audio/'+audio_path
     client = speech.SpeechClient()
 
     with open(audio_path, "rb") as audio_file:
