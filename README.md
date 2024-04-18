@@ -16,6 +16,6 @@
 
 **Running flask app**
 
-* In command line type "export FLASK_APP=main"
-* Followed by "export FLASK_ENV=development"
+* In command line type "set FLASK_APP=app"
+* Followed by "set FLASK_ENV=development"
 * CMD : flask run -p PORT_NUMBER

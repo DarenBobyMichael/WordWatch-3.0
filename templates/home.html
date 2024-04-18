@@ -67,11 +67,12 @@
         <canvas id="ratingsChart" width="400" height="200">
             <script>
                 var ratingsData = {{ ratings|tojson|safe }};
+                var labelsData = {{ labels_data|tojson|safe }}; // Added this line
                 var ctx = document.getElementById('ratingsChart').getContext('2d');
                 var chart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: {{ labels_data }},
+                        labels: labelsData, // Use dynamic labels here
                         datasets: [{
                             label: 'Ratings',
                             data: ratingsData,
@@ -81,15 +82,15 @@
                         }]
                     },
                     options: {
-                        indexAxis: 'y', // This makes the chart horizontal
+                        indexAxis: 'y',
                         scales: {
-                            x: { // Changed from 'xAxes' to 'x' for version 3.x
+                            x: {
                                 beginAtZero: true
                             }
                         }
                     }
                 });
-                </script>
+            </script>
                 
         </canvas>
         

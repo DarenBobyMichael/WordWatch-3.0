@@ -83,7 +83,7 @@ def predict_malayalam():
     off_rating = None
     text_content = None
     ratings=None
-    labels_data=None
+    labels_data=['Not Offensive','Not in intended language','Off_target_ind','Off_target_group','Profanity']
     cur = mysql.connection.cursor()
     user_id=session['id']
     Name=session['first_name']+" "+session['last_name']
