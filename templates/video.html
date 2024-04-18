@@ -33,6 +33,24 @@
             fileNameDisplay.style.display = 'block'; // Make sure the file name display is visible
         }
     </script>
+    <script>
+        function updatePreviewAndFilename() {
+            const fileInput = document.getElementById('video-file');
+            const fileDisplayArea = document.getElementById('file-name-display');
+            const videoPreview = document.getElementById('video-preview');
+
+            fileInput.addEventListener('change', event => {
+                const file = fileInput.files[0];
+                if (file) {
+                    fileDisplayArea.style.display = 'block';
+                    fileDisplayArea.textContent = `Selected video: ${file.name}`;
+
+                    videoPreview.style.display = 'block';
+                    videoPreview.src = URL.createObjectURL(file);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="top-right-corner">
@@ -66,17 +84,20 @@
     
     <div class="container">
         <h2 >Upload a video for offensiveness prediction</h2>
-        <form id="upload-form" enctype="multipart/form-data">
-            <input type="file" id="video-file" accept="video/mp4">
+        <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" id="video-file" name="file" accept="video/*">
             <label for="video-file" class="upload-label">Choose a video file</label>
-            <p id="file-name-display" style="display: none;">Selected video: </p> <!-- File name display -->
+            <p id="file-name-display" style="display: none; color: black;">Selected video: </p> <!-- File name display -->
             <div id="preview-container">
-                <video controls id="video-preview" style="display: none; width: 500px; height: 500px;"></video>
+                <video controls id="video-preview" style="display: none; width: 500px; height: 300px;"></video>
             </div>
             <button type="submit">Submit</button>
         </form>
+        {%   if upload_status == 1 %}
+        <p style="color: white;">Successfully uploaded</p>
+        {% endif %}
         
-
+        
             <!-- <h2>Predicted Text:</h2>
             <div class="output">
                 <p>{{ text_content }}</p>

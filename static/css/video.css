@@ -173,7 +173,7 @@ input[type="submit"]:hover {
 }
 
 .video-preview {
-    width: 500px; /* Set the width of the video to 100% of its container */
+    width: 100px; /* Set the width of the video to 100% of its container */
     max-width: 100px; /* Set a maximum width for the video */
     height: 300px; /* Automatically adjust the height to maintain aspect ratio */
     margin: 0 auto; /* Center the video horizontally */

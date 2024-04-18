@@ -18,7 +18,7 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-    background: rgba(0, 0 0, 1);
+    background: rgba(0, 0, 0,1);
     padding: 20px;
     overflow-x: hidden; /* Prevent horizontal scrolling */
     overflow-y: auto; /* Enable vertical scrolling if the content overflows */
@@ -44,7 +44,6 @@ body {
 .sidebar ul li:last-child {
     border-bottom: none; /* Remove border from last item */
 }
-
 
 @keyframes fadeInAnimation {
     from { opacity: 0; }

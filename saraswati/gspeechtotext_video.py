@@ -5,13 +5,12 @@ import re
 import subprocess
 import videotoaudio
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_cred.json"
-def transcribe_malayalam_audio():
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "saraswati/google_cred.json"
+def transcribe_malayalam_audio(video_name):
 
-        video_path=input("Enter video file name: ")
-        video_path="Video/"+video_path
-        videotoaudio.extract_audio_from_video(video_path,"Audio/video_audio.wav")
-        audio_path='Audio/video_audio.wav'
+        video_path="saraswati/uploads/"+video_name
+        videotoaudio.extract_audio_from_video(video_path,"saraswati/Audio/video_audio.wav")
+        audio_path='saraswati/Audio/video_audio.wav'
         client = speech.SpeechClient()
 
         with open(audio_path, "rb") as audio_file:
@@ -30,7 +29,8 @@ def transcribe_malayalam_audio():
         
         for result in response.results:
             transcripts.append(result.alternatives[0].transcript)
+        print(transcripts[0])
 
         return transcripts[0]
-
+    
 
