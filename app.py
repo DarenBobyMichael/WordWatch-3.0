@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from saraswati.malayalam_predict import predict  # Corrected module name
+from saraswati.malayalam_predict_new import predict  # Corrected module name
 from flask_mysqldb import MySQL
 from flask import flash
 from functools import wraps
@@ -82,6 +82,8 @@ def predict_malayalam():
     predicted_text = None
     off_rating = None
     text_content = None
+    ratings=None
+    labels_data=None
     cur = mysql.connection.cursor()
     user_id=session['id']
     Name=session['first_name']+" "+session['last_name']
@@ -90,7 +92,7 @@ def predict_malayalam():
     cur.close()
     if request.method == 'POST':
         text_to_predict = request.form['text_to_predict']
-        text_content, predicted_text, off_rating = predict(text_to_predict)
+        text_content, predicted_text, labels_data,ratings = predict(text_to_predict)
         cur = mysql.connection.cursor()
 
         try:
@@ -108,4 +110,4 @@ def predict_malayalam():
         finally:
             cur.close() 
     # Ensure the HTML content is stored in a template file, e.g., `home.html` under the `templates` directory.
-    return render_template("home.html", Name=Name, history=history, text_content=text_content, predicted_text=predicted_text, off_rating=off_rating)
+    return render_template("home.html", Name=Name, history=history, text_content=text_content, predicted_text=predicted_text, ratings=ratings,labels_data=labels_data)
