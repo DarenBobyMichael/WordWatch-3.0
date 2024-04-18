@@ -67,6 +67,10 @@ def register():
             return redirect(url_for('login'))
     return render_template('register.html')
 
+@app.route('/video',methods=['GET','POST'])
+def video():
+    return render_template('video.html')
+
 
 @app.route('/home', methods=['GET', 'POST'])
 @login_required

@@ -12,6 +12,9 @@
         function logout() {
             window.location.href = "/";
         }
+        function video() {
+            window.location.href = "/video";
+        }
     </script>
 </head>
 <body>
@@ -20,6 +23,7 @@
             <span class="username">Welcome, {{ Name }}</span>
         </div>
         <button onclick="logout()" class="logout-button">Logout</button>
+        <button onclick="video()" class="logout-button">Video</button>
     </div>
     <div id="video-container">
         <video autoplay muted loop>
