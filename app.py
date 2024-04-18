@@ -69,7 +69,13 @@ def register():
 
 @app.route('/video',methods=['GET','POST'])
 def video():
-    return render_template('video.html')
+    user_id=session['id']
+    Name=session['first_name']+" "+session['last_name']
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT text_input, submission_time,OFF FROM input_history WHERE user_id=%s ORDER BY submission_time DESC", (user_id,))
+    history = cur.fetchall()
+    cur.close()
+    return render_template('video.html',Name=Name,history=history)
 
 
 @app.route('/home', methods=['GET', 'POST'])
@@ -92,13 +98,14 @@ def predict_malayalam():
     cur.close()
     if request.method == 'POST':
         text_to_predict = request.form['text_to_predict']
+        if text_to_predict == '':
+                flash("Text input is empty", 'error')
+                return redirect(url_for('predict_malayalam'))
         text_content, predicted_text, labels_data,ratings = predict(text_to_predict)
         cur = mysql.connection.cursor()
 
         try:
-            if text_to_predict == '':
-                flash("Text input is empty", 'error')
-                return redirect(url_for('predict_malayalam'))
+            
             cur.execute("INSERT INTO input_history (user_id, text_input, OFF) VALUES (%s, %s, %s)", (user_id, text_to_predict,off_rating))
             mysql.connection.commit()  # Commit the transaction
             flash("Data inserted successfully into input_history table")

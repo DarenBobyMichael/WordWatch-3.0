@@ -18,10 +18,17 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0 0, 1);
     padding: 20px;
     overflow-x: hidden; /* Prevent horizontal scrolling */
     overflow-y: auto; /* Enable vertical scrolling if the content overflows */
+}
+
+/* Sidebar List Styles */
+.sidebar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .sidebar ul li {
@@ -30,12 +37,20 @@ body {
     margin-bottom: 5px;
     animation: fadeInAnimation ease 0.5s forwards; /* Apply the fade-in animation */
     word-wrap: break-word; /* Wrap long text */
+    transition: transform 0.3s ease; /* Add smooth transition */
+    padding:5px
 }
+
+.sidebar ul li:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
 
 @keyframes fadeInAnimation {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
 
 #video-container {
     position: fixed;

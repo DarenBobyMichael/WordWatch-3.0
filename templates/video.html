@@ -10,18 +10,27 @@
             document.querySelectorAll('.sidebar ul li').forEach((item, index) => {
                 item.style.animationDelay = `${index * 0.1}s`;
             });
+            // Modify the video file input listener to preview automatically upon file selection
+            document.getElementById('video-file').addEventListener('change', function() {
+                previewVideo();
+                displayFileName();
+            });
         });
-
         function logout() {
             window.location.href = "/";
         }
-
         function previewVideo() {
             const videoFile = document.getElementById('video-file').files[0];
             const videoPreview = document.getElementById('video-preview');
             const videoURL = URL.createObjectURL(videoFile);
             videoPreview.src = videoURL;
             videoPreview.style.display = 'block'; // Show the video preview container
+        }
+        function displayFileName() {
+            const videoFile = document.getElementById('video-file').files[0];
+            const fileNameDisplay = document.getElementById('file-name-display');
+            fileNameDisplay.textContent = `Selected video: ${videoFile.name}`;
+            fileNameDisplay.style.display = 'block'; // Make sure the file name display is visible
         }
     </script>
 </head>
@@ -41,43 +50,42 @@
     </div>
 
     <div class="sidebar">
-        <h3>Input History</h3>
+        <h2 style="color: gray;">Input History</h3>
         <ul>
-            <!-- Your sidebar content here -->
+        {% if history %}
+            {% for record in history %}
+                {% if record[2] == 1 %}
+                    <li style="color: rgb(255, 72, 94)">{{ record[0]}}</li>
+                {% else %}
+                    <li style="color: rgb(255, 255, 255)">{{ record[0]}}</li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         </ul>
-        <!-- Video preview in the sidebar -->
-        <!-- <div class="preview-container">
-            <h3>Video Preview</h3>
-            <video controls id="video-preview-sidebar">
-                <source src="#" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div> -->
     </div>
     
     <div class="container">
-        <h2 style="padding-top: 100px;">Upload a video for offensiveness prediction</h2>
+        <h2 >Upload a video for offensiveness prediction</h2>
         <form id="upload-form" enctype="multipart/form-data">
             <input type="file" id="video-file" accept="video/mp4">
             <label for="video-file" class="upload-label">Choose a video file</label>
-            <button type="button" style="margin-top: 200px; margin-bottom: 60px;" onclick="previewVideo()">Preview</button>
+            <p id="file-name-display" style="display: none;">Selected video: </p> <!-- File name display -->
             <div id="preview-container">
-                <video controls id="video-preview" style="display: none; width: 500px; height: 500px;">
-                    <source src="#" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>  
+                <video controls id="video-preview" style="display: none; width: 500px; height: 500px;"></video>
+            </div>
             <button type="submit">Submit</button>
-            <h2>Predicted Text:</h2>
+        </form>
+        
+
+            <!-- <h2>Predicted Text:</h2>
             <div class="output">
                 <p>{{ text_content }}</p>
             </div>
             <h2>Offensiveness Prediction:</h2>
             <div class="output">
                 <p class="emoji">{% if off_rating == 1 %}🚨{% else %}✅{% endif %}</p>
-            </div>
+            </div> -->
             
-        </form>
     
         <!-- Video preview section inside the container -->
          

@@ -35,14 +35,14 @@
     </div>
 
     <div class="sidebar">
-        <h3>Input History</h3>
+        <h2 style="color: gray;">Input History</h3>
         <ul>
         {% if history %}
             {% for record in history %}
                 {% if record[2] == 1 %}
-                    <li style="color: rgb(123, 3, 35)">{{ record[0]}}</li>
+                    <li style="color: rgb(255, 72, 94)">{{ record[0]}}</li>
                 {% else %}
-                    <li>{{ record[0]}}</li>
+                    <li style="color: rgb(255, 255, 255)">{{ record[0]}}</li>
                 {% endif %}
             {% endfor %}
         {% endif %}

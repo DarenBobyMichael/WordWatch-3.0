@@ -36,8 +36,8 @@ def is_english_string(input_string):
     return all(ord(char) < 128 for char in input_string)
 
 # Load the model and vectorizer
-loaded_model = joblib.load('random_forest_model.joblib')
-loaded_vectorizer = joblib.load('count_vectorizer.joblib')
+loaded_model = joblib.load('saraswati/random_forest_model.joblib')
+loaded_vectorizer = joblib.load('saraswati/count_vectorizer.joblib')
 
 # Example text for prediction and detecting whether it is malayalam or english characters
 

@@ -1,4 +1,7 @@
 import requests
+from ml2en import ml2en
+import gspeechtotext_video
+
 
 API_TOKEN="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"
 API_URL = "https://api-inference.huggingface.co/models/Hate-speech-CNERG/deoffxlmr-mono-malyalam"
@@ -6,6 +9,9 @@ headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
 
 def predict(text):
+
+    new_text=[]
+    new_text.append(ml2en.transliterate(gspeechtotext_video.transcribe_malayalam_audio()))
     output = query({
         "inputs": f"{text}",
     })
@@ -24,4 +30,3 @@ def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.json()
 
-print(predict('enthada'))
