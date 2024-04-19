@@ -1,26 +1,12 @@
-from flask import Flask
-from flask_mysqldb import MySQL
+from instagrapi import Client
+import json
+cl = Client()
 
-app = Flask(__name__)
+cl.login('baby_groot_smirking', 'bobymichael.123')
 
-# MySQL configuration
-app.config['MYSQL_HOST'] = 'Darens-MacBook-Pro.local'
-app.config['MYSQL_USER'] = 'root'# Replace with your MySQL username
-app.config['MYSQL_PASSWORD'] = 'Trvc1@6w'  # Replace with your MySQL password
-app.config['MYSQL_DB'] = 'wordwatchmaster'  # Replace with your MySQL database name
+media_id = cl.media_id(cl.media_pk_from_url('https://www.instagram.com/p/C5691GYv1g8wdOgAn7QcUn8CiwkAhZ0dXXzLj40/'))
+comment = cl.media_comments(media_id,amount=1)
 
-mysql = MySQL(app)
-
-@app.route('/')
-def check_mysql_connection():
-    try:
-        # Attempt to connect to MySQL
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT 1")
-        cursor.close()
-        return 'MySQL connection successful!'
-    except Exception as e:
-        return f'MySQL connection failed: {e}'
-
-if __name__ == '__main__':
-    app.run(debug=True,port=5050)
+for i,j in enumerate(comment[0]):
+    if i==1:
+        print(j[1])
