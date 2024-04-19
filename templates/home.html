@@ -25,7 +25,7 @@
             <span class="username">Welcome, {{ Name }}</span>
         </div>
         <button onclick="logout()" class="logout-button">Logout</button>
-        <button onclick="video()" class="logout-button">Video</button>
+        
     </div>
     <div id="video-container">
         <video autoplay muted loop>
@@ -95,5 +95,20 @@
         
 
     </div>
+    <div class="container1">
+        <div class="audio-container" onclick="audio()">
+            <img src="../static/images/Audio Wave.png" alt="audio-icon" style="width: 40px; height: 40px;"/>
+            <h3>Audio Analysis</h3>
+        </div>
+        <div class="video-container" onclick="video()">
+            <img src="../static/images/Cinema.png" alt="video-icon" style="width: 40px; height: 40px;"/>
+            <h3>Video Analysis</h3>
+        </div>
+    </div>
+    <script>
+        function openAudioPage() {
+            window.location.href = "/audio"; // Redirect to audio.html page
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offensiveness Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/audio.css') }}">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3"></script>
+
+</head>
+<body>
+    <div class="top-right-corner">
+        <div class="user-info">
+            <span class="username">Welcome, {{ Name }}</span>
+        </div>
+        <button onclick="logout()" class="logout-button">Logout</button>
+        <button onclick="video()" class="logout-button">Video</button>
+    </div>
+    <div id="video-container">
+        <video autoplay muted loop>
+            <source src="static/videos/bgvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="sidebar">
+        <h3>Input History</h3>
+        <ul>
+        {% if history %}
+            {% for record in history %}
+                {% if record[2] == 1 %}
+                    <li style="color: rgb(123, 3, 35)">{{ record[0]}}</li>
+                {% else %}
+                    <li style="color: rgb(255, 255, 255)">{{ record[0]}}</li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </div>
+    
+
+
+    <div class="main-container">
+        <div class="container">
+            <h2>Upload an audio for offensiveness prediction</h2>
+            <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data"></form>
+            <div class="form-row">
+                <div class="form-column">
+                    <input type="file" id="audio-file" name="file" accept="audio/*">
+                </div>
+                <div class="form-column">
+                    <label for="audio-file" class="upload-label">Choose an audio file</label>
+                </div>
+                <div class="form-column">
+                    <button id="submit-audio" type="submit">Upload</button>
+                </div>
+                
+            </div>
+            
+            </form>
+            {% if upload_status == 1 %}
+            <p style="color: white;">Successfully uploaded</p>
+            {% endif %}
+        </div>
+    
+    
+        <div class="play-container">
+            <audio id="audio-player" controls style="display: none;"></audio>
+        </div>
+        <div class="output-container">
+            <canvas id="ratingsChart" width="400" height="200">
+                <script>
+                    var ratingsData = {{ ratings|tojson|safe }};
+                    var labelsData = {{ labels_data|tojson|safe }}; // Added this line
+                    var ctx = document.getElementById('ratingsChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labelsData, // Use dynamic labels here
+                            datasets: [{
+                                label: 'Ratings',
+                                data: ratingsData,
+                                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'white' // Change color of x-axis ticks to white
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'white' // Change color of y-axis ticks to white
+                        }
+                    }
+                }
+            }
+                    });
+                </script>
+                    
+            </canvas>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('audio-file').addEventListener('change', function() {
+                playSelectedAudio();
+            });
+        });
+    
+        function playSelectedAudio() {
+            const audioFile = document.getElementById('audio-file').files[0];
+            const audioPlayer = document.getElementById('audio-player');
+            
+            if (audioFile) {
+                const audioURL = URL.createObjectURL(audioFile);
+                audioPlayer.src = audioURL;
+                audioPlayer.style.display = 'block'; // Show the audio player
+                audioPlayer.pause();
+            }
+        }
+    </script>
+</body>
+</html>
