@@ -62,7 +62,7 @@
             <span class="username">Welcome, {{ Name }}</span>
         </div>
         <button onclick="logout()" class="logout-button">Logout</button>
-        <button onclick="text()" class="logout-button">Switch to Text</button>
+        <button onclick="video()" class="logout-button" style="background-color: rgba(0, 187, 255,0.4);">Switch to Text</button>
 
     </div>
 
@@ -103,37 +103,37 @@
         <p style="color: white;">Successfully uploaded</p>
         {% endif %}
         
-        <canvas id="ratingsChart" width="400" height="200">
-            <script>
-                var ratingsData = {{ ratings|tojson|safe }};
-                var labelsData = {{ labels_data|tojson|safe }};
-                var ctx = document.getElementById('ratingsChart').getContext('2d');
-                var chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labelsData,
-                        datasets: [{
-                            label: 'Ratings',
-                            data: ratingsData,
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                min: 0, // Set the minimum value for the x-axis
-                                max: 100 // Set the maximum value for the x-axis
-                            }
-                        }
+      <canvas id="ratingsChart" width="400" height="200">
+    <script>
+        var ratingsData = {{ ratings|tojson|safe }};
+        var labelsData = {{ labels_data|tojson|safe }};
+        var ctx = document.getElementById('ratingsChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsData,
+                datasets: [{
+                    label: 'Ratings',
+                    data: ratingsData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        min: 0, // Set the minimum value for the x-axis
+                        max: 1 // Set the maximum value for the x-axis
                     }
-                });
-            </script>
-        </canvas>
-        
+                }
+            }
+        });
+    </script>
+</canvas>
+
 
     </div>
 </body>

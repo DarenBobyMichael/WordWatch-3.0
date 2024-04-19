@@ -39,7 +39,7 @@ def predict(text):
     for i in output[0]:
         if i['label'] == 'Not_offensive':
             i['label'] =  "Abusive"
-            i['score']= offensiveness
+            i['score']= offensiveness/2
         
         i['label']=''+' '.join(i['label'].split('_'))
         labels.append(i['label'])
