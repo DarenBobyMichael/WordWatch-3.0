@@ -4,8 +4,6 @@ API_TOKEN="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"
 API_URL = "https://api-inference.huggingface.co/models/Hate-speech-CNERG/deoffxlmr-mono-malyalam"
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
-import requests
-
 # API_URL_2 = "https://api-inference.huggingface.co/models/Hate-speech-CNERG/malayalam-codemixed-abusive-MuRIL"
 API_URL_2 = "https://api-inference.huggingface.co/models/Hate-speech-CNERG/indic-abusive-allInOne-MuRIL"
 headers_2 = {"Authorization": "Bearer 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"}
